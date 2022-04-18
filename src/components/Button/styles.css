@@ -1,4 +1,16 @@
 button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   font-size: 1rem;
-  padding: 4px 8px;
+  padding: 8px 16px;
+}
+button:hover {
+  background-color: #eee;
+}
+button:active {
+  background-color: #ddd;
+}
+button:disabled {
+  background-color: transparent;
 }
