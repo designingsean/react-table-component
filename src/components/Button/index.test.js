@@ -14,8 +14,7 @@ describe('Button', () => {
   test('renders the button element with correct text', () => {
     render(<Button {...defaultProps} />);
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
-    expect(screen.getByText(defaultProps.children)).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: defaultProps.children})).toBeInTheDocument();
   });
 
   test('can be clicked and fires the correct function', () => {
