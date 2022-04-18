@@ -29,3 +29,7 @@ I had it in my head that I could use this project to quickly learn EmberJS at th
 ## Responsive
 
 I purposefully chose not to bring in any external libraries to show what I could do without those helpers. However, in the real world, I would probably use a React table library, which would have helped make the table more friendly on mobile devices. This is also why I did not make the table a separate component.
+
+## Accessibility
+
+The checkboxes as implemented right now might not be super accessible, given that their checked state are changed programmatically. Not 100% sure, though, as I am basing this on the CSS for the `:checked` state no longer working correctly.
