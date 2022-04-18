@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Button";
 import Checkbox from "../Checkbox";
+import { ReactComponent as DownloadIcon } from "../../assets/icons/download.svg";
 import "./styles.css";
 
 function DownloadTable (props) {
@@ -103,7 +104,7 @@ function DownloadTable (props) {
           clickHandler={handleDownloadClick}
           disabled={buttonState}
         >
-          Download Selected
+          <DownloadIcon style={{"margin-right": "10px", "width": "15px"}} /> Download Selected
         </Button>
       </caption>
       <thead>
