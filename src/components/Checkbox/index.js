@@ -24,6 +24,7 @@ function Checkbox (props) {
   return (
     <input
       type="checkbox"
+      aria-label={props.ariaLabel}
       ref={checkboxRef}
       index={props.index}
       disabled={props.isDisabled}
