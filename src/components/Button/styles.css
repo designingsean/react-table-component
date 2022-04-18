@@ -13,4 +13,5 @@ button:active {
 }
 button:disabled {
   background-color: transparent;
+  cursor: not-allowed;
 }
