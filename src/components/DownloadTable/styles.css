@@ -14,7 +14,11 @@ caption button {
 tr {
   border-top: 1px solid #bbb;
 }
+/* this style doesn't work when you set the react checkbox programmatically, but leaving it for the cool factor */
 tbody tr:has(input:is(:checked)) {
+  background-color: #ddd;
+}
+.active {
   background-color: #ddd;
 }
 tbody tr:hover {

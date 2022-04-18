@@ -73,7 +73,7 @@ function DownloadTable (props) {
   }
 
   const rowDisplay = rows.map((row, index) =>
-    <tr key={`row-${index}`}>
+    <tr key={`row-${index}`} className={row.isChecked ? 'active' : ''}>
       <td>
         <Checkbox
           index={index}
