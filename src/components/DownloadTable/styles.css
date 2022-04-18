@@ -2,7 +2,6 @@ table {
   border: 1px solid #bbb;
   border-collapse: collapse;
   border-spacing: 0;
-  font-family: Arial, Helvetica, sans-serif;
   width: 100%;
 }
 caption {
@@ -11,7 +10,6 @@ caption {
 }
 caption button {
   float: right;
-  font-size: 1.2rem;
 }
 tr {
   border-top: 1px solid #bbb;
