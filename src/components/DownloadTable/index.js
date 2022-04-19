@@ -90,49 +90,32 @@ function DownloadTable (props) {
     alert(message);
   }
 
-  const rowDisplay = rows.map((row, index) =>
-    <Tr key={`row-${index}`} className={row.isChecked ? 'active' : ''}>
-      <Td>
-        <Checkbox
-          index={index}
-          isChecked={row.isChecked}
-          isDisabled={(row.status !== 'available') ? true : false}
-          onChange={()=>{handleCheckboxClick(index)}}
-        />
-      </Td>
-      <Td>{row.name}</Td>
-      <Td>{row.device}</Td>
-      <Td>{row.path}</Td>
-      <Td><span className={row.status}></span>{row.status}</Td>
-    </Tr>
-  )
-
   return (
     <TableContainer>
       <Table variant='simple'>
         <TableCaption placement="top">
           <Flex>
             <Box textAlign='left' fontSize='xl'>
-          <Checkbox
-            pr={12}
+              <Checkbox
+                pr={12}
                 pt={2}
-            isChecked={massSelectCheckedState}
-            isIndeterminate={massSelectIndeterminateState}
-            onChange={(event)=>{handleMassCheckboxClick(event)}}
-          />
-          {props.title} ({countSelected===0 ? "none" : countSelected} selected)
-        </Box>
+                isChecked={massSelectCheckedState}
+                isIndeterminate={massSelectIndeterminateState}
+                onChange={(event)=>{handleMassCheckboxClick(event)}}
+              />
+              {props.title} ({countSelected===0 ? "none" : countSelected} selected)
+            </Box>
             <Spacer />
-        <Box textAlign='right'>
-          <Button
-            variant='ghost'
-            onClick={handleDownloadClick}
-            isDisabled={buttonState}
-            leftIcon={<MdFileDownload />}
-          >
-            Download Selected
-          </Button>
-        </Box>
+            <Box textAlign='right'>
+              <Button
+                variant='ghost'
+                onClick={handleDownloadClick}
+                isDisabled={buttonState}
+                leftIcon={<MdFileDownload />}
+              >
+                Download Selected
+              </Button>
+            </Box>
         </Flex>
         </TableCaption>
         <Thead>
@@ -145,7 +128,22 @@ function DownloadTable (props) {
           </Tr>
         </Thead>
         <Tbody>
-          {rowDisplay}
+          {rows.map((row, index) =>
+            <Tr key={`row-${index}`} className={row.isChecked ? 'active' : ''}>
+              <Td>
+                <Checkbox
+                  index={index}
+                  isChecked={row.isChecked}
+                  isDisabled={(row.status !== 'available') ? true : false}
+                  onChange={()=>{handleCheckboxClick(index)}}
+                />
+              </Td>
+              <Td>{row.name}</Td>
+              <Td>{row.device}</Td>
+              <Td>{row.path}</Td>
+              <Td><span className={row.status}></span>{row.status}</Td>
+            </Tr>
+          )}
         </Tbody>
       </Table>
     </TableContainer>
