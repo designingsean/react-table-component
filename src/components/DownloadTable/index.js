@@ -81,7 +81,7 @@ function DownloadTable (props) {
           ariaLabel="Select Row"
           isChecked={row.isChecked ? 'checked' : 'unchecked'}
           isDisabled={(row.status !== 'available') ? true : false}
-          handleChange={()=>{handleCheckboxClick(index)}}
+          changeHandler={()=>{handleCheckboxClick(index)}}
         />
       </td>
       <td>{row.name}</td>
@@ -97,7 +97,7 @@ function DownloadTable (props) {
         <Checkbox
           ariaLabel="Select All"
           isChecked={massSelectCheckedState}
-          handleChange={(event)=>{handleMassCheckboxClick(event)}}
+          changeHandler={(event)=>{handleMassCheckboxClick(event)}}
         />
         {props.title} ({countSelected===0 ? "none" : countSelected} selected)
         <Button

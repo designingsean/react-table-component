@@ -28,7 +28,7 @@ function Checkbox (props) {
       ref={checkboxRef}
       index={props.index}
       disabled={props.isDisabled}
-      onChange={props.handleChange}
+      onChange={props.changeHandler}
     />
   )
 }
