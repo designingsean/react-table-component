@@ -104,7 +104,7 @@ function DownloadTable (props) {
           clickHandler={handleDownloadClick}
           disabled={buttonState}
         >
-          <DownloadIcon style={{"margin-right": "10px", "width": "15px"}} /> Download Selected
+          <DownloadIcon style={{marginRight: "10px", width: "15px"}} /> Download Selected
         </Button>
       </caption>
       <thead>
