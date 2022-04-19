@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button";
-import Checkbox from "../Checkbox";
-import { ReactComponent as DownloadIcon } from "../../assets/icons/download.svg";
+import { 
+  Box,
+  Button, 
+  Checkbox, 
+  SimpleGrid,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer
+} from '@chakra-ui/react'
+import { MdFileDownload } from "react-icons/md";
 import "./styles.css";
 
 function DownloadTable (props) {
@@ -9,7 +20,8 @@ function DownloadTable (props) {
   const [selectedData, setSelectedData] = useState([]);
   const [countSelected, setCountSelected] = useState(0);
   const [buttonState, setButtonState] = useState(true);
-  const [massSelectCheckedState, setMassSelectCheckedState] = useState('unchecked');
+  const [massSelectCheckedState, setMassSelectCheckedState] = useState(false);
+  const [massSelectIndeterminateState, setMassSelectIndeterminateState] = useState(false);
 
   const maxAvailable = rows.filter(row => row.status === 'available').length;
 
@@ -29,15 +41,18 @@ function DownloadTable (props) {
     switch (countSelected) {
       case 0:
         setButtonState(true);
-        setMassSelectCheckedState('unchecked');
+        setMassSelectCheckedState(false);
+        setMassSelectIndeterminateState(false);
         break;
       case maxAvailable:
         setButtonState(false);
-        setMassSelectCheckedState('checked');
+        setMassSelectCheckedState(true);
+        setMassSelectIndeterminateState(false);
         break;
       default:
         setButtonState(false);
-        setMassSelectCheckedState('indeterminate');
+        setMassSelectCheckedState(false);
+        setMassSelectIndeterminateState(true)
     }
   }, [countSelected, maxAvailable]);
 
@@ -74,52 +89,61 @@ function DownloadTable (props) {
   }
 
   const rowDisplay = rows.map((row, index) =>
-    <tr key={`row-${index}`} className={row.isChecked ? 'active' : ''}>
-      <td>
+    <Tr key={`row-${index}`} className={row.isChecked ? 'active' : ''}>
+      <Td>
         <Checkbox
           index={index}
-          ariaLabel="Select Row"
-          isChecked={row.isChecked ? 'checked' : 'unchecked'}
+          isChecked={row.isChecked}
           isDisabled={(row.status !== 'available') ? true : false}
-          changeHandler={()=>{handleCheckboxClick(index)}}
+          onChange={()=>{handleCheckboxClick(index)}}
         />
-      </td>
-      <td>{row.name}</td>
-      <td>{row.device}</td>
-      <td>{row.path}</td>
-      <td><span className={row.status}></span>{row.status}</td>
-    </tr>
+      </Td>
+      <Td>{row.name}</Td>
+      <Td>{row.device}</Td>
+      <Td>{row.path}</Td>
+      <Td><span className={row.status}></span>{row.status}</Td>
+    </Tr>
   )
 
   return (
-    <table>
-      <caption>
-        <Checkbox
-          ariaLabel="Select All"
-          isChecked={massSelectCheckedState}
-          changeHandler={(event)=>{handleMassCheckboxClick(event)}}
-        />
-        {props.title} ({countSelected===0 ? "none" : countSelected} selected)
-        <Button
-          clickHandler={handleDownloadClick}
-          disabled={buttonState}
-        >
-          <DownloadIcon style={{marginRight: "10px", width: "15px"}} /> Download Selected
-        </Button>
-      </caption>
-      <thead>
-        <tr>
-          <th width="5%" aria-label="Select"></th>
-          <th width="15%">Name</th>
-          <th width="15%">Device</th>
-          <th>Path</th>
-          <th width="10%">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rowDisplay}
-      </tbody>
-    </table>
+    <TableContainer>
+      <SimpleGrid columns={2} px={6} pt={6}>
+        <Box textAlign='left'>
+          <Checkbox
+            pr={12}
+            pt={1}
+            isChecked={massSelectCheckedState}
+            isIndeterminate={massSelectIndeterminateState}
+            onChange={(event)=>{handleMassCheckboxClick(event)}}
+          />
+          {props.title} ({countSelected===0 ? "none" : countSelected} selected)
+        </Box>
+        <Box textAlign='right'>
+          <Button
+            variant='ghost'
+            onClick={handleDownloadClick}
+            isDisabled={buttonState}
+            leftIcon={<MdFileDownload />}
+          >
+            Download Selected
+          </Button>
+        </Box>
+      </SimpleGrid>
+      <Table variant='simple'>
+        <Thead>
+          <Tr>
+            <Th width="5%" aria-label="Select"></Th>
+            <Th width="15%">Name</Th>
+            <Th width="15%">Device</Th>
+            <Th>Path</Th>
+            <Th width="10%">Status</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {rowDisplay}
+        </Tbody>
+      </Table>
+    </TableContainer>
   )
 }
 
