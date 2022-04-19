@@ -3,13 +3,15 @@ import {
   Box,
   Button, 
   Checkbox, 
-  SimpleGrid,
+  Flex,
+  Spacer,
   Table,
   Thead,
   Tbody,
   Tr,
   Th,
   Td,
+  TableCaption,
   TableContainer
 } from '@chakra-ui/react'
 import { MdFileDownload } from "react-icons/md";
@@ -107,17 +109,20 @@ function DownloadTable (props) {
 
   return (
     <TableContainer>
-      <SimpleGrid columns={2} px={6} pt={6}>
-        <Box textAlign='left'>
+      <Table variant='simple'>
+        <TableCaption placement="top">
+          <Flex>
+            <Box textAlign='left' fontSize='xl'>
           <Checkbox
             pr={12}
-            pt={1}
+                pt={2}
             isChecked={massSelectCheckedState}
             isIndeterminate={massSelectIndeterminateState}
             onChange={(event)=>{handleMassCheckboxClick(event)}}
           />
           {props.title} ({countSelected===0 ? "none" : countSelected} selected)
         </Box>
+            <Spacer />
         <Box textAlign='right'>
           <Button
             variant='ghost'
@@ -128,8 +133,8 @@ function DownloadTable (props) {
             Download Selected
           </Button>
         </Box>
-      </SimpleGrid>
-      <Table variant='simple'>
+        </Flex>
+        </TableCaption>
         <Thead>
           <Tr>
             <Th width="5%" aria-label="Select"></Th>
